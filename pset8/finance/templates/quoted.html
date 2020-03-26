@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <form action="/quote" method="get">
+        <div class="card">
+            <h5 class="card-header">Current stock price for {{ company }} ({{ symbol }})</h5>
+            <div class="card-body">
+                <h5 class="card-title">{{ price }}</h5>
+            </div>
+        </div>
+    </form>
+{% endblock %}

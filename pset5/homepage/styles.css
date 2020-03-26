@@ -1,0 +1,27 @@
+body
+{
+    text-align: left;
+    font-family: Arial;
+}
+header
+{
+    font-size: xx-large;
+}
+main
+{
+    font-size: medium;
+}
+footer
+{
+    font-size: large;
+}
+.photo
+{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.caption
+{
+    font-size: large;
+}

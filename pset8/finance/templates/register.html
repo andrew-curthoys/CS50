@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <form action="/register" method="post" onchange="usernameValidation();" class="needs-validation username-validation" novalidate>
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="username" id="username" placeholder="Username" type="text" required>
+            <div class="invalid-feedback">
+                Please provide a username
+            </div>
+            <div class="invalid-feedback" id="invalid-username">
+                Username already taken
+            </div>
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" placeholder="Password" type="password" required>
+            <div class="invalid-feedback">
+                Please enter a password
+            </div>
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="confirmation" placeholder="Please confirm password" type="password" required>
+            <div class="invalid-feedback">
+                Please confirm password
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit" id="submit_button">Register</button>
+    </form>
+
+    <script>
+    // https://cs50.stackexchange.com/questions/34520/ajax-form-validation
+        $(document).ready(function() {
+            $('form').submit(function(event){
+                var validation = false
+                var username = $('#username').val();
+                $.ajax({
+                    url: "/check",
+                    type: "get",
+                    cache: false,
+                    async: false,
+                    data: {username: username},
+                    success: function(response) {
+                        if (response === true){
+                            return validation = true;
+                        }
+                        else {
+                            $('#invalid-username').show()
+                            event.preventDefault()
+                            return validation = false;
+                        }
+                    }
+                })
+                if (validation === false){
+                    event.preventDefault()
+                }
+            })
+        })
+    </script>
+{% endblock %}

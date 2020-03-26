@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+
+    <body>
+
+        <form>
+            <div class="card">
+                <h5 class="card-header">Historical transaction data for {{ username }}</h5>
+            </div>
+        </form>
+
+        <!-- https://datatables.net/examples/styling/bootstrap4 -->
+        <table id="survey" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Transaction Type</th>
+                    <th>Stock Symbol</th>
+                    <th>Transaction Price</th>
+                    <th>Number of Shares</th>
+                    <th>Date of Transaction</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in history_data %}
+                    <tr>
+
+                        <td>{{ row['transaction_type'] }}</td>
+                        <td>{{ row['stock_symbol'] }}</td>
+                        <td>{{ row['share_price'] }}</td>
+                        <td>{{ row['no_of_shares'] }}</td>
+                        <td>{{ row['datetime'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <script>
+            $(document).ready(function() {
+                $('#survey').DataTable();
+            } );
+        </script>
+
+    </body>
+
+{% endblock %}
